@@ -37,14 +37,12 @@ bool Configuracion::guardarCFG(){
     archivo.close();
     return true;
 }
-
 std::string Configuracion::getString(const std::string& clave, const std::string& defaultValue){
     if (datos.find(clave) != datos.end()){
         return datos[clave];
     }
     return defaultValue;
 }
-
 int getInt(const std::string& clave,int defaultValue = 0){
     if(datos.find(clave)!=datos.end()){
         try{
@@ -109,12 +107,10 @@ bool guardarTXT(){
     archivo.close();
     return true;
 }
-
 void agregarCancion(const Cancion& cancion){
     std::string key = "cancion_"+cancion.id;
     set(key,cancion.toString());
 }
-
 bool eliminarCacion(const std::string& id){
     std::string key = "cancion_"+id;
     if(datos.find(key) == datos.end()){
@@ -123,7 +119,6 @@ bool eliminarCacion(const std::string& id){
     datos.erase(key);
     return true;
 }
-
 Cancion* buscarCancion(const std::string& id){
     std::string key = "cancion_"+id;
     if(datos.find(key)!=datos.end()){
@@ -133,7 +128,6 @@ Cancion* buscarCancion(const std::string& id){
     }
     return nullptr;
 }
-
 std::vector<Cancion> obtenerTodasLasCanciones(){
     std::vector<Cancion> canciones;
     for(const auto& par: datos){
@@ -143,7 +137,6 @@ std::vector<Cancion> obtenerTodasLasCanciones(){
     }
     return canciones;
 }
-
 int getTotalCanciones(){
     int total = 0;
     for(const auto& par : datos){
@@ -153,17 +146,54 @@ int getTotalCanciones(){
     }
     return total;
 }
-
 void mostrarTodasLasCanciones(){
     std::vector<Cancion> canciones = obtenerTodasLasCanciones();
-
-    std::cout<<"Canciones registradas: "<<std::endl;
+    int a = 1;
     if(canciones.empy()){
         return;
     } else{
         for(const auto& cancion: canciones){
-            cancion.mostrar();
+            cancion.mostrar(a);
+            a +=1;
         }
     }
 }
-    
+void Configuracion::setUltimaCancion(const std::string& id){
+    set("ultima_cancion", id);
+    guardarCFG();
+}
+std::string Configuracion::getUltimaCancionID(){
+    return getString("ultima_cancion_id","");
+}
+Cancion* Configuracion::getUltimaCancion(){
+    std:: string id = getUltimaCancionID();
+    if(!id.empty()){
+        return buscarCancion(id);
+    }
+    return nullptr;
+}
+bool Configuracion::hayUltimaCancion(){
+    std::string id = getUltimaCancionID();
+    return !id.empty();
+}
+bool Configuracion::sincronizar(){
+    return guardarCFG()&&guardarTXT();
+}
+void Configuracion::mostrarUltimaCancionReproducida(){
+    Cancion* ultima = getUltimaCancion();
+    if(!hayUltimaCancion()){
+        str::cout<<"Reproducciendo ( ): "<<str::endl;
+        str::cout<<"Artista: "<<str::endl;
+        str::cout<<"Album: "<<str::endl;
+        return;
+    }
+    if(ultima){
+        str::cout<<"Reproducciendo ("<< << "): "<<ultima->nombre_song <<str::endl;
+        str::cout<<"Artista: "<<ultima->nombre_artista<<str::endl;
+        str::cout<<"Album: "<<ultima->Album<<" ["<<ultima->years<<"]"<<str::endl;
+    }
+}
+
+
+
+

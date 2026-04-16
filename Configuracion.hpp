@@ -21,7 +21,6 @@ struct Cancion {
         return id+"|"+nombre_song+"|"+nombre_artista+"|"+nombre_album+"|"+
         std::to_string(years)+"|"+std::to_string(duracion_seg)+"|"+ubicacion_archivo;
     }
-
     static Cancion fromString(const std::string& data){
         Cancion c;
         std::stringstream ss(data);
@@ -34,12 +33,12 @@ struct Cancion {
         c.years = std::stroi(years_str);
         std::string duracion_seg;
         std::getline(ss,duracion_seg,'|');
-        c.years = std::stroi(duracion_seg);
+        c.duracion_seg = std::stroi(duracion_seg);
         std::getline(ss,c.ubicacion_archivo);
         return c;
     }
-    void mostrar() const{
-        std::cout<<nombre_song<<" - "<<nombre_album<<std::endl;
+    void mostrar(int numero) const{
+        std::cout<<numero<<" "<<nombre_song<<" - "<<nombre_album<<std::endl;
     }
 }
 
@@ -67,17 +66,25 @@ class Cofiguracion {
 
 
 
-    //metodos TXT
-    bool cargarTXT();
-    bool guardarTXT();
+        //metodos TXT
+        bool cargarTXT();
+        bool guardarTXT();
 
-    void agregarCancion(const Cancion& cancion);
-    bool eliminarCacion(const std::string& id);
-    Cancion* buscarCancion(const std::string& id);
-    std::vector<Cancion> obtenerTodasLasCanciones();
-    int getTotalCanciones();
-    void mostrarTodasLasCanciones();
-    
-    
+        void agregarCancion(const Cancion& cancion);
+        bool eliminarCacion(const std::string& id);
+        Cancion* buscarCancion(const std::string& id);
+        std::vector<Cancion> obtenerTodasLasCanciones();
+        int getTotalCanciones();
+        void mostrarTodasLasCanciones();
+
+
+        void setUltimaCancion(const std::string& id);
+        std::string getUltimaCancionID();
+        Cancion* getUltimaCancion();
+        bool hayUltimaCancion();
+
+
+        bool sincronizar();
+        void Configuracion::mostrarUltimaCancionReproducida();
 }
 #endif
