@@ -1,44 +1,21 @@
+#pragma once
+#include "Node.h"
+#include "Cancion.h"
+
 #include "Configuracion.hpp"
 #include <iostream>
 #include <limits>
 #include <fstream>
 #include <string>
 using namespace std;
-
+0
 void ListaDeReproduccionActual();
 void mostrarMenu();
-Cancion ingresarCancion(const std::string& id1=""){
-    Cancion c;
-    if(id1.empty()){
-        std::cout<< "ID: ";
-        std::cin >> c.id;
-    } else{
-        c.id = id1;
-    }
-    std::cin.ignore();
-    std::cout<<"Nombre Cancion: ";
-    std::getline(std::cin,c.nombre_song);
-    std::cout>>"Nombre albun: "
-    std::getline(std::cin,c.nombre_album);
-    std::cout<<"Año: ";
-    std::cin>>c.years;
-    std::cout<<"Duracion (segundos): ";
-    std::cin>>c.duracion_seg;
-    std::cin.ignore();
-    std::cout<<"Ubicacion archivo: ";
-    std::getline(std::cin,c.ubicacion_archivo);
-    return c;
-}
+void leerArchivo();
 int main(){
-    Configuracion config("status.cfg","music_source.txt");
-    config.cargarCFG();
-    if(!config.cargarTXT()){
-        std::cout << "No se encontro archivo de canciones. Se creara uno nuevo." << std::endl;
-    }
-    String opcion :: tolower;
+    String opcion;
     do
     {
-        config.mostrarUltimaCancionReproducida();
         mostrarMenu();
         cin >> opcion;
         switch (opcion){
@@ -55,7 +32,6 @@ int main(){
             case "a":
                 break;
             case "l":
-                config.mostrarTodasLasCanciones();
                 break;
             case "x":
                 break;
@@ -68,7 +44,9 @@ int main(){
 
 void mostrarMenu(){
     system("clear");
-    cout << ""<<enld;
+    cout << "Reproducionedo " << enld;
+    cout << "Artista: "   << enld;
+    cout << "Albun: "  << enld;
     cout << "Opciones" << enld;
     cout << "W - Repoducir/Pausar" << enld;
     cout << "Q - Pista Anterior" << enld;
