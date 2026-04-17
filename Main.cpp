@@ -1,6 +1,7 @@
 #pragma once
 #include "Node.h"
 #include "Cancion.h"
+#include "Lista.h"
 
 #include "Configuracion.hpp"
 #include <iostream>
