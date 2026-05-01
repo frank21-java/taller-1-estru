@@ -1,6 +1,4 @@
-#pragma once
 #include "Node.h"
-#include "Cancion.h"
 #include "Lista.h"
 
 #include "Configuracion.hpp"
@@ -9,34 +7,40 @@
 #include <fstream>
 #include <string>
 using namespace std;
-0
+
 void ListaDeReproduccionActual();
 void mostrarMenu();
 void leerArchivo();
 int main(){
-    String opcion;
+    string opcion;
     do
     {
         mostrarMenu();
         cin >> opcion;
-        switch (opcion){
-            case "w":
-                break;
-            case "q":
-                break;
-            case "e":
-                break;
-            case "s":
-                break;
-            case "r":
-                break;
-            case "a":
-                break;
-            case "l":
-                break;
-            case "x":
-                break;
-            default: cout<< "opcion invalida" << endl;
+        if (opcion == "w") {
+            
+        }
+        else if (opcion == "q") {
+            
+        }
+        else if (opcion == "e") {
+            
+        }
+        else if (opcion == "s") {
+            
+        }
+        else if (opcion == "r") {
+            
+        }
+        else if (opcion == "a") {
+            
+        }
+        else if (opcion == "l") {
+            
+        }
+        else if (opcion == "x") break;
+        else {
+            cout << "opcion invalida" << endl;
         }
     } while (opcion != "x");
 
@@ -45,19 +49,19 @@ int main(){
 
 void mostrarMenu(){
     system("clear");
-    cout << "Reproducionedo " << enld;
-    cout << "Artista: "   << enld;
-    cout << "Albun: "  << enld;
-    cout << "Opciones" << enld;
-    cout << "W - Repoducir/Pausar" << enld;
-    cout << "Q - Pista Anterior" << enld;
-    cout << "E - Pista Siguiente" << enld;
-    cout << "S - Activar/Desactivar modo alatorio" << enld;
-    cout << "R - Reproduccion (Desactivado/Repetir una/repetir todas)" << enld;
-    cout << "A - Ver lista de reproccion actual" << enld;
-    cout << "L - Listado de canciones" << enld;
-    cout << "X - Salir" << enld;
-    cout << "Ingrese Opcion: "
+    cout << "Reproducionedo " << endl;
+    cout << "Artista: "   << endl;
+    cout << "Albun: "  << endl;
+    cout << "Opciones" << endl;
+    cout << "W - Repoducir/Pausar" << endl;
+    cout << "Q - Pista Anterior" << endl;
+    cout << "E - Pista Siguiente" << endl;
+    cout << "S - Activar/Desactivar modo alatorio" << endl;
+    cout << "R - Reproduccion (Desactivado/Repetir una/repetir todas)" << endl;
+    cout << "A - Ver lista de reproccion actual" << endl;
+    cout << "L - Listado de canciones" << endl;
+    cout << "X - Salir" << endl;
+    cout << "Ingrese Opcion: " <<endl;
 }
 void ListaDeReproduccionActual(){
     

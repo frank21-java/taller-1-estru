@@ -1,7 +1,14 @@
 #pragma once
-#include "Cancion.h"
+#include <string>
+using namespace std;
 struct Node{
-    Cancion datos;
     Node* next;
-    Node(Cancion c);
-}
+    int id;
+    string nombre;
+    string artista;
+    string album;
+    int year;
+    int duracion;
+    string ruta;
+    Node(int id, string nombre, string artista, string album, int year, int duracion, string ruta);
+};

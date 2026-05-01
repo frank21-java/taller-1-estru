@@ -1,10 +1,10 @@
 #include "Lista.h"
+#include <iostream>
 using namespace std;
 Lista::Lista(){
     start=nullptr;
 }
-void Lista::agregar(Cancion c){
-    Node* nuevo=new Node(c);
+void Lista::agregar(Node* nuevo){
     if(start==nullptr){
         start=nuevo;
         return;
@@ -22,29 +22,29 @@ void Lista::mostrar(){
     }
     Node* actual=start;
     while(actual!=nullptr){
-        cout<<actual->datos.id<<". "<<actual->datos.nombre<<" - "<<actual->artista<<endl;
+        cout<<actual->id<<". "<<actual->nombre<<" - "<<actual->artista<<endl;
         actual=actual->next;
     }
 }
 Node* Lista::buscar(int id){
     Node* actual=start;
     while(actual!=nullptr){
-        if(actual->datos.id==id) return actual;
+        if(actual->id==id) return actual;
         actual=actual->next;
     }
     return nullptr;
 }
 void Lista::eliminar(int id){
     if(start==nullptr) return;
-    if(start->datos.id==id){
+    Node* actual=start;
+    if(start->id==id){
         Node* temp=actual->next;
         start=start->next;
         delete temp;
         return;
     }
-    Node* actual=start;
     while(actual->next!=nullptr){
-        if(actual->next-datos.id==id){
+        if(actual->next->id==id){
             Node* temp=actual->next;
             actual->next=temp->next;
             delete temp;
@@ -54,5 +54,5 @@ void Lista::eliminar(int id){
     }
 }
 bool Lista::vacia(){
-    return cabeza==nullptr;
+    return start==nullptr;
 }

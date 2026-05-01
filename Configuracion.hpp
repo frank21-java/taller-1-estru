@@ -11,7 +11,7 @@
 
 struct Cancion {
     std::string id;
-    stdd::string nombre_song;
+    std::string nombre_song;
     std::string nombre_artista;
     std::string nombre_album;
     int years;
@@ -30,19 +30,19 @@ struct Cancion {
         std::getline(ss,c.nombre_album,'|');
         std::string years_str;
         std::getline(ss,years_str,'|');
-        c.years = std::stroi(years_str);
+        c.years = std::stoi(years_str);
         std::string duracion_seg;
         std::getline(ss,duracion_seg,'|');
-        c.duracion_seg = std::stroi(duracion_seg);
+        c.duracion_seg = std::stoi(duracion_seg);
         std::getline(ss,c.ubicacion_archivo);
         return c;
     }
     void mostrar(int numero) const{
         std::cout<<numero<<" "<<nombre_song<<" - "<<nombre_album<<std::endl;
     }
-}
+};
 
-class Cofiguracion {
+class Configuracion {
     private:
         std::map<std::string, std::string> datos;
         std::string nombreArchivoCFG;
@@ -58,7 +58,7 @@ class Cofiguracion {
         std::string getString(const std::string& clave, const std::string& defaultValue = "");
         int getInt(const std::string& clave,int defaultValue = 0);
         bool getBool(const std::string& clave,bool defaultValue = false);
-        void set(const std::string& clave,const std;;string& valor);
+        void set(const std::string& clave,const std::string& valor);
         void set(const std::string& clave,int valor);        
         void set(const std::string& clave,bool valor);
 
@@ -85,6 +85,6 @@ class Cofiguracion {
 
 
         bool sincronizar();
-        void Configuracion::mostrarUltimaCancionReproducida();
-}
+        void mostrarUltimaCancionReproducida();
+};
 #endif

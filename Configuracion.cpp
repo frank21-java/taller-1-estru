@@ -1,17 +1,17 @@
 #include "Configuracion.hpp"
 #include <set>
-Configuracion(const std::string& archivoCFG,const std::string& archivoTXT)
+Configuracion::Configuracion(const std::string& archivoCFG,const std::string& archivoTXT)
     : nombreArchivoCFG(archivoCFG),nombreArchivoTXT(archivoTXT){}
 // metodos para el CFG
 std::string Configuracion::trim(const std::string& str){
     size_t first = str.find_first_not_of(" \t\r\n");
-    size_t last = str.find_first_not_of(" \t\r\n");
+    size_t last = str.find_last_not_of(" \t\r\n");
     if(first == std::string::npos || last == std::string::npos) return "";
-    return str.substr(first,(last.first+1))
+    return str.substr(first,(last-first+1));
 }
 bool Configuracion::cargarCFG(){
     std::ifstream archivo(nombreArchivoCFG);
-    if (!archivo.if_open()){
+    if (!archivo.is_open()){
         return false;
     }
     datos.clear();
@@ -32,7 +32,7 @@ bool Configuracion::guardarCFG(){
     std::ofstream archivo(nombreArchivoCFG);
     if(!archivo.is_open()) return false;
     for(const auto& par:datos){
-        archivo << par.first <<"="<<par.second<<std:endl;
+        archivo << par.first <<"="<<par.second<<std::endl;
     }
     archivo.close();
     return true;
@@ -43,17 +43,17 @@ std::string Configuracion::getString(const std::string& clave, const std::string
     }
     return defaultValue;
 }
-int getInt(const std::string& clave,int defaultValue = 0){
+int Configuracion::getInt(const std::string& clave,int defaultValue){
     if(datos.find(clave)!=datos.end()){
         try{
             return std::stoi(datos[clave]);
         } catch (...){
-            return defaultValue
+            return defaultValue;
         }
     }
     return defaultValue;
 }
-bool getBool(const std::string& clave,bool defaultValue){
+bool Configuracion::getBool(const std::string& clave,bool defaultValue){
     if(datos.find(clave)!=datos.end()){
         std::string valor = datos[clave];
         std::transform(valor.begin(),valor.end(),valor.begin(),::tolower);
@@ -61,13 +61,13 @@ bool getBool(const std::string& clave,bool defaultValue){
     }
     return defaultValue;
 }
-void set(const std::string& clave,const std;;string& valor){
+void Configuracion::set(const std::string& clave,const std::string& valor){
     datos[clave]=valor;
 }
-void set(const std::string& clave,int valor){
+void Configuracion::set(const std::string& clave,int valor){
     datos[clave]=std::to_string(valor);
 }
-void set(const std::string& clave,bool valor){
+void Configuracion::set(const std::string& clave,bool valor){
     datos[clave]=valor ? "true" : "false";
 }
 
@@ -76,7 +76,7 @@ void set(const std::string& clave,bool valor){
 
 
 //metodos TXT
-bool cargarTXT(){
+bool Configuracion::cargarTXT(){
     std::ifstream archivo(nombreArchivoTXT);
     if(!archivo.is_open()) return false;
     std::string linea;
@@ -97,21 +97,21 @@ bool cargarTXT(){
     archivo.close();
     return true;
 }
-bool guardarTXT(){
+bool Configuracion::guardarTXT(){
     std::ofstream archivo(nombreArchivoTXT);
     if(!archivo.is_open()) return false;
-    std::vector<Cancion> cancion = obtenerTodasLasCanciones();
+    std::vector<Cancion> canciones = obtenerTodasLasCanciones();
     for(const auto& cancion:canciones){
-        archivo<<cancion.toString()<<std::enld;
+        archivo<<cancion.toString()<<std::endl;
     }
     archivo.close();
     return true;
 }
-void agregarCancion(const Cancion& cancion){
+void Configuracion::agregarCancion(const Cancion& cancion){
     std::string key = "cancion_"+cancion.id;
     set(key,cancion.toString());
 }
-bool eliminarCacion(const std::string& id){
+bool Configuracion::eliminarCacion(const std::string& id){
     std::string key = "cancion_"+id;
     if(datos.find(key) == datos.end()){
         return false;
@@ -119,7 +119,7 @@ bool eliminarCacion(const std::string& id){
     datos.erase(key);
     return true;
 }
-Cancion* buscarCancion(const std::string& id){
+Cancion* Configuracion::buscarCancion(const std::string& id){
     std::string key = "cancion_"+id;
     if(datos.find(key)!=datos.end()){
         static Cancion cancion;
@@ -128,7 +128,7 @@ Cancion* buscarCancion(const std::string& id){
     }
     return nullptr;
 }
-std::vector<Cancion> obtenerTodasLasCanciones(){
+std::vector<Cancion> Configuracion::obtenerTodasLasCanciones(){
     std::vector<Cancion> canciones;
     for(const auto& par: datos){
         if(par.first.find("cancion_") == 0){
@@ -137,19 +137,19 @@ std::vector<Cancion> obtenerTodasLasCanciones(){
     }
     return canciones;
 }
-int getTotalCanciones(){
+int Configuracion::getTotalCanciones(){
     int total = 0;
     for(const auto& par : datos){
         if(par.first.find("cancion_") == 0){
-            total++
+            total++;
         }
     }
     return total;
 }
-void mostrarTodasLasCanciones(){
+void Configuracion::mostrarTodasLasCanciones(){
     std::vector<Cancion> canciones = obtenerTodasLasCanciones();
     int a = 1;
-    if(canciones.empy()){
+    if(canciones.empty()){
         return;
     } else{
         for(const auto& cancion: canciones){
@@ -182,18 +182,14 @@ bool Configuracion::sincronizar(){
 void Configuracion::mostrarUltimaCancionReproducida(){
     Cancion* ultima = getUltimaCancion();
     if(!hayUltimaCancion()){
-        str::cout<<"Reproducciendo ( ): "<<str::endl;
-        str::cout<<"Artista: "<<str::endl;
-        str::cout<<"Album: "<<str::endl;
+        std::cout<<"Reproducciendo ( ): "<<std::endl;
+        std::cout<<"Artista: "<<std::endl;
+        std::cout<<"Album: "<<std::endl;
         return;
     }
     if(ultima){
-        str::cout<<"Reproducciendo ("<< << "): "<<ultima->nombre_song <<str::endl;
-        str::cout<<"Artista: "<<ultima->nombre_artista<<str::endl;
-        str::cout<<"Album: "<<ultima->Album<<" ["<<ultima->years<<"]"<<str::endl;
+        std::cout<<"Reproducciendo ("<< ultima->nombre_song << "): "<< std::endl;
+        std::cout<<"Artista: "<<ultima->nombre_artista<<std::endl;
+        std::cout<<"Album: "<<ultima->nombre_album<<" ["<<ultima->years<<"]"<<std::endl;
     }
 }
-
-
-
-
