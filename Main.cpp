@@ -34,12 +34,8 @@ int main(){
             lista.siguiente();
             reproduciendo=true;
         }
-        else if (opcion == "s") {
-            
-        }
-        else if (opcion == "r") {
-            
-        }
+        else if (opcion == "s") lista.alternarAleatorio();
+        else if (opcion == "r") lista.repeticion();
         else if (opcion == "a") {
             
         }
@@ -80,12 +76,10 @@ void pausar(Lista& lista){
     if(reproduciendo){
         cout<<"pausando "<<actual->nombre<<endl;
         reproduciendo=false;
-        //return nullptr;
     }
     else{
         cout<<"reanudando "<<actual->nombre<<endl;
         reproduciendo=true;
-        //return actual;
     }
 }
 
