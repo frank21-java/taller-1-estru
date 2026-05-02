@@ -1,2 +1,10 @@
 1,Cancion1,Artista1,Album1,2020,180,ruta1.mp3
 2,Cancion2,Artista2,Album2,2021,200,ruta2.mp3
+3,Cancion3,Artista3,Album3,2019,210,ruta3.mp3
+4,Cancion4,Artista4,Album4,2018,175,ruta4.mp3
+5,Cancion5,Artista5,Album5,2022,190,ruta5.mp3
+6,Cancion6,Artista6,Album6,2017,220,ruta6.mp3
+7,Cancion7,Artista7,Album7,2023,205,ruta7.mp3
+8,Cancion8,Artista8,Album8,2016,160,ruta8.mp3
+9,Cancion9,Artista9,Album9,2020,230,ruta9.mp3
+10,Cancion10,Artista10,Album10,2021,185,ruta10.mp3

@@ -12,24 +12,27 @@ using namespace std;
 void mostrarMenu(Node* actual);
 
 void cargarTxt(Lista& lista);
+bool reproduciendo=true;
+void pausar(Lista& lista);
 
 int main(){
     Lista lista;
     cargarTxt(lista);
-    
+    Node* actual;
     string opcion;
     do
     {
-        mostrarMenu(lista.getActual());
+        actual=lista.getActual();
+        mostrarMenu(actual);
         cin >> opcion;
-        if (opcion == "w") {
-            
+        if (opcion == "w") pausar(lista);
+        else if (opcion == "q"){
+            lista.anterior();
+            reproduciendo=true;
         }
-        else if (opcion == "q") {
-            
-        }
-        else if (opcion == "e") {
-            
+        else if (opcion == "e"){
+            lista.siguiente();
+            reproduciendo=true;
         }
         else if (opcion == "s") {
             
@@ -40,9 +43,7 @@ int main(){
         else if (opcion == "a") {
             
         }
-        else if (opcion == "l") {
-            
-        }
+        else if (opcion == "l") lista.mostrar();
         else if (opcion == "x") break;
         else {
             cout << "opcion invalida" << endl;
@@ -53,11 +54,11 @@ int main(){
 }
 
 void mostrarMenu(Node* actual){
-    system("clear");
-    if (actual!=nullptr){
-        cout << "Reproducionedo " << actual->nombre<< endl;
+    //system("clear");
+    if (reproduciendo){
+        cout << "Reproduciendo " << actual->nombre<< endl;
         cout << "Artista: "   << actual->artista<<endl;
-        cout << "Albun: "  << actual->album<<endl;
+        cout << "Album: "  << actual->album<<endl;
     }
     else{
         cout<<"No se esta reproduciendo nada"<<endl;
@@ -66,12 +67,26 @@ void mostrarMenu(Node* actual){
     cout << "W - Repoducir/Pausar" << endl;
     cout << "Q - Pista Anterior" << endl;
     cout << "E - Pista Siguiente" << endl;
-    cout << "S - Activar/Desactivar modo alatorio" << endl;
+    cout << "S - Activar/Desactivar modo aleatorio" << endl;
     cout << "R - Reproduccion (Desactivado/Repetir una/repetir todas)" << endl;
-    cout << "A - Ver lista de reproccion actual" << endl;
+    cout << "A - Ver lista de reproduccion actual" << endl;
     cout << "L - Listado de canciones" << endl;
     cout << "X - Salir" << endl;
     cout << "Ingrese Opcion: " <<endl;
+}
+
+void pausar(Lista& lista){
+    Node* actual=lista.getActual();
+    if(reproduciendo){
+        cout<<"pausando "<<actual->nombre<<endl;
+        reproduciendo=false;
+        //return nullptr;
+    }
+    else{
+        cout<<"reanudando "<<actual->nombre<<endl;
+        reproduciendo=true;
+        //return actual;
+    }
 }
 
 void cargarTxt(Lista& lista){

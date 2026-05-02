@@ -8,12 +8,14 @@ Lista::Lista(){
 void Lista::agregar(Node* nuevo){
     if(start==nullptr){
         start=nuevo;
+        actual=start;
         return;
     }
     Node* nodoTemp=start;
     while(nodoTemp->next != nullptr){
         nodoTemp=nodoTemp->next;
     }
+    nuevo->prev=nodoTemp;
     nodoTemp->next = nuevo;
 }
 void Lista::mostrar(){
@@ -62,10 +64,16 @@ void Lista::siguiente(){
     if(actual && actual->next){
         actual=actual->next;
     }
+    else{
+        cout<<"este es el fin de la lista"<<endl;
+    }
 }
 void Lista::anterior(){
     if(actual && actual->prev){
         actual=actual->prev;
+    }
+    else{
+        cout<<"este es el inicio de la lista"<<endl;
     }
 }
 Node* Lista::getActual(){
