@@ -1,21 +1,26 @@
 #include "Node.h"
 #include "Lista.h"
 
-#include "Configuracion.hpp"
+//#include "Configuracion.hpp"
 #include <iostream>
-#include <limits>
+//#include <limits>
 #include <fstream>
 #include <string>
+#include <sstream>
 using namespace std;
 
-void ListaDeReproduccionActual();
-void mostrarMenu();
-void leerArchivo();
+void mostrarMenu(Node* actual);
+
+void cargarTxt(Lista& lista);
+
 int main(){
+    Lista lista;
+    cargarTxt(lista);
+    
     string opcion;
     do
     {
-        mostrarMenu();
+        mostrarMenu(lista.getActual());
         cin >> opcion;
         if (opcion == "w") {
             
@@ -43,15 +48,20 @@ int main(){
             cout << "opcion invalida" << endl;
         }
     } while (opcion != "x");
-
+    cout << "apagando..." << endl;
     return 0;
 }
 
-void mostrarMenu(){
+void mostrarMenu(Node* actual){
     system("clear");
-    cout << "Reproducionedo " << endl;
-    cout << "Artista: "   << endl;
-    cout << "Albun: "  << endl;
+    if (actual!=nullptr){
+        cout << "Reproducionedo " << actual->nombre<< endl;
+        cout << "Artista: "   << actual->artista<<endl;
+        cout << "Albun: "  << actual->album<<endl;
+    }
+    else{
+        cout<<"No se esta reproduciendo nada"<<endl;
+    }
     cout << "Opciones" << endl;
     cout << "W - Repoducir/Pausar" << endl;
     cout << "Q - Pista Anterior" << endl;
@@ -63,6 +73,32 @@ void mostrarMenu(){
     cout << "X - Salir" << endl;
     cout << "Ingrese Opcion: " <<endl;
 }
-void ListaDeReproduccionActual(){
+
+void cargarTxt(Lista& lista){
+    ifstream archivo("music_source.txt");
+    if(!archivo.is_open()){
+        cout<<"error al abrir el archivo"<<endl;
+        return;
+    }
     
+    string linea;
+    
+    while(getline(archivo,linea)){
+        if(linea.empty()) continue;
+        
+        stringstream ss(linea);
+        string id, nombre, artista, album, year, duracion, ruta;
+        
+        getline(ss, id, ',');
+        getline(ss, nombre, ',');
+        getline(ss, artista, ',');
+        getline(ss, album, ',');
+        getline(ss, year, ',');
+        getline(ss, duracion, ',');
+        getline(ss, ruta);
+        
+        Node* nuevo=new Node(stoi(id),nombre,artista,album,stoi(year),stoi(duracion),ruta);
+        lista.agregar(nuevo);
+    }
+    archivo.close();
 }

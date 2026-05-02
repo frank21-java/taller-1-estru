@@ -4,6 +4,7 @@
 class Lista{
     private:
         Node* start;
+        Node* actual;
     public:
         Lista();
         
@@ -12,4 +13,8 @@ class Lista{
         Node* buscar(int id);
         void eliminar(int id);
         bool vacia();
+        
+        void siguiente();
+        void anterior();
+        Node* getActual();
 };
