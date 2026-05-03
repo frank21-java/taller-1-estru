@@ -16,6 +16,7 @@ bool reproduciendo=true;
 void pausar(Lista& lista);
 bool primero=false;
 void registrar(Node* clonar,Lista& registros);
+void guardarCfg(Node* actual);
 
 int main(){
     Lista lista;
@@ -34,12 +35,14 @@ int main(){
             reproduciendo=true;
             actual=lista.getActual();
             registrar(actual,registros);
+            guardarCfg(actual);
         }
         else if (opcion == "e"){
             lista.siguiente();
             reproduciendo=true;
             actual=lista.getActual();
             registrar(actual,registros);
+            guardarCfg(actual);
         }
         else if (opcion == "s") lista.alternarAleatorio();
         else if (opcion == "r") lista.repeticion();
@@ -117,7 +120,7 @@ void cargarTxt(Lista& lista,Lista& registros){
             Node* temp=new Node(stoi(id),nombre,artista,album,stoi(year),stoi(duracion),ruta);
             registros.agregar(temp); 
             primero=true;
-            
+            guardarCfg(nuevo);
         }
     }
     archivo.close();
@@ -133,4 +136,17 @@ void registrar(Node* clonar,Lista& registros){
         clonar->ruta
         );
     registros.agregar(clon);
+}
+void guardarCfg(Node* actual){
+    if(actual==nullptr)return;
+    
+    ofstream archivo("status.cfg");
+    archivo<<"id="<<actual->id<<endl;
+    archivo<<"nombre_cancion="<<actual->nombre<<endl;
+    archivo<<"nombre_artista="<<actual->artista<<endl;
+    archivo<<"nombre_album="<<actual->album<<endl;
+    archivo<<"year="<<actual->year<<endl;
+    archivo<<"duracion="<< actual->duracion<<endl;
+    archivo<<"ubicacion_archivo="<<actual->ruta<<endl;
+    archivo.close();
 }
