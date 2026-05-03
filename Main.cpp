@@ -11,13 +11,16 @@ using namespace std;
 
 void mostrarMenu(Node* actual);
 
-void cargarTxt(Lista& lista);
+void cargarTxt(Lista& lista,Lista& registros);
 bool reproduciendo=true;
 void pausar(Lista& lista);
+bool primero=false;
+void registrar(Node* clonar,Lista& registros);
 
 int main(){
     Lista lista;
-    cargarTxt(lista);
+    Lista registros;
+    cargarTxt(lista,registros);
     Node* actual;
     string opcion;
     do
@@ -29,16 +32,18 @@ int main(){
         else if (opcion == "q"){
             lista.anterior();
             reproduciendo=true;
+            actual=lista.getActual();
+            registrar(actual,registros);
         }
         else if (opcion == "e"){
             lista.siguiente();
             reproduciendo=true;
+            actual=lista.getActual();
+            registrar(actual,registros);
         }
         else if (opcion == "s") lista.alternarAleatorio();
         else if (opcion == "r") lista.repeticion();
-        else if (opcion == "a") {
-            
-        }
+        else if (opcion == "a") registros.mostrar();
         else if (opcion == "l") lista.mostrar();
         else if (opcion == "x") break;
         else {
@@ -83,7 +88,7 @@ void pausar(Lista& lista){
     }
 }
 
-void cargarTxt(Lista& lista){
+void cargarTxt(Lista& lista,Lista& registros){
     ifstream archivo("music_source.txt");
     if(!archivo.is_open()){
         cout<<"error al abrir el archivo"<<endl;
@@ -108,6 +113,24 @@ void cargarTxt(Lista& lista){
         
         Node* nuevo=new Node(stoi(id),nombre,artista,album,stoi(year),stoi(duracion),ruta);
         lista.agregar(nuevo);
+        if(primero==false) {
+            Node* temp=new Node(stoi(id),nombre,artista,album,stoi(year),stoi(duracion),ruta);
+            registros.agregar(temp); 
+            primero=true;
+            
+        }
     }
     archivo.close();
+}
+void registrar(Node* clonar,Lista& registros){
+    Node* clon=new Node(
+        clonar->id,
+        clonar->nombre,
+        clonar->artista,
+        clonar->album,
+        clonar->year,
+        clonar->duracion,
+        clonar->ruta
+        );
+    registros.agregar(clon);
 }
