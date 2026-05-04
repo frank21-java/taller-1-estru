@@ -35,14 +35,12 @@ int main(){
             reproduciendo=true;
             actual=lista.getActual();
             registrar(actual,registros);
-            guardarCfg(actual);
         }
         else if (opcion == "e"){
             lista.siguiente();
             reproduciendo=true;
             actual=lista.getActual();
             registrar(actual,registros);
-            guardarCfg(actual);
         }
         else if (opcion == "s") lista.alternarAleatorio();
         else if (opcion == "r") lista.repeticion();
@@ -53,6 +51,7 @@ int main(){
             cout << "opcion invalida" << endl;
         }
     } while (opcion != "x");
+    guardarCfg(actual);
     cout << "apagando..." << endl;
     return 0;
 }
