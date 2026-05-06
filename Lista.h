@@ -5,6 +5,7 @@ class Lista{
     private:
         Node* start;
         Node* actual;
+        Node* songCfg;
         bool aleatorio;
         int cantidad;
         int repetir;
@@ -12,7 +13,8 @@ class Lista{
         Lista();
         
         void agregar(Node* nuevo);
-        void mostrar();
+        bool mostrar();
+        bool mostrar2(Lista& registros);
         Node* buscar(int id);
         void eliminar(int id);
 
@@ -22,4 +24,10 @@ class Lista{
         void alternarAleatorio();
         int generarRandom();
         void repeticion();
+        void Cfg(Node* cfg);
+        void Cfgala(bool alator);
+        void Cfgrep(int repet);
+        bool getAleatorio();
+        int getRepeticion();
+        Node* getStart();
 };
