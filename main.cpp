@@ -38,12 +38,7 @@ int main(){
             lista.anterior();
             reproduciendo=true;
             actual=lista.getActual();
-            if(idcfg != actual->id){
-                registrar(actual,registros);
-            } else {
-                lista.siguiente();
-                actual=lista.getActual();
-            }
+            if(idcfg != actual->id) registrar(actual,registros);
         }
         else if (opcion == "e"){
             lista.siguiente();
@@ -119,7 +114,7 @@ void mostrarMenu(Node* actual, Lista& lista){
         repe = "RA";
     }
     system("clear");
-    if (cfgant != false&& actual != nullptr){
+    if (reproduciendo){
         cout << "Reproduciendo"<<"("<< alas <<"-"<<repe<<")"<<":" << actual->nombre<< endl;
         cout << "Artista: "   << actual->artista<<endl;
         cout << "Album: "  << actual->album<<"   ["<<actual->year<<"]"<<endl;
