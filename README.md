@@ -25,13 +25,14 @@ f
 
 ## Funciones
 
-W – Reproducir/Pausar
-Q – Pista Anterior
-E – Pista Siguiente
-S – Activar/Desactivar modo aleatorio
-R – Repetición (Desactivado/Repetir una/Repetir todas)
-A – Ver lista de reproducción actual
-L – Listado de canciones
-X – Salir
+
+- `W` → Reproducir / Pausar
+- `Q` → Pista anterior
+- `E` → Pista siguiente
+- `S` → Activar / Desactivar modo aleatorio
+- `R` → Repetición (Desactivado/Repetir una/Repetir todas)
+- `A` → Ver lista de reproducción actual
+- `L` → Listado de canciones
+- `X` → Salir
 
 agregar las opciones de submenus
