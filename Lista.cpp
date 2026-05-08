@@ -96,7 +96,7 @@ void Lista::eliminar(int id){
         nodoTemp=nodoTemp->next;
     }
 }
-void ultimaSong(){
+int Lista::ultimaSong(){
     int idsong = 1;
     if(start==nullptr){
         return idsong;
@@ -142,8 +142,8 @@ void Lista::reproducirsong(int id){
     while(nodoTemp!=nullptr){
         if(nodoTemp->id==id) {
             actual = nodoTemp;
-            return:
-            }
+            return;
+        }
         nodoTemp=nodoTemp->next;
     }
 }
@@ -201,13 +201,13 @@ int Lista::getRepeticion(){
 Node* Lista::getStart(){
     return start;
 }
-void limpiar(){
+void Lista::limpiar(){
 	Node* actual = start;
 	while (actual != nullptr){
 		Node* temp = actual;
 		actual = actual->next;
-		dekete temp;
+		delete temp;
 	}
-	strat = nullptr;
-	cantidad = 0
+	start = nullptr;
+	cantidad = 0;
 }

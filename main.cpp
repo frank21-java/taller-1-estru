@@ -1,25 +1,25 @@
 #include "Node.h"
 #include "Lista.h"
 
-//#include "Configuracion.hpp"
 #include <iostream>
-//#include <limits>
 #include <fstream>
 #include <string>
 #include <sstream>
 using namespace std;
+int idcfg;
+bool primero=false;
+bool cfgant = false;
+bool reproduciendo=false;
+
 void mostrarMenu(Node* actual,Lista& lista);
 void menu_2(Lista& registros,Node* actual,Lista& lista);
-bool cfgant = false;
 void cargarTxt(Lista& lista,Lista& registros);
-bool reproduciendo=false;
 void pausar(Lista& lista);
-bool primero=false;
 void registrar(Node* clonar,Lista& registros);
 void guardarCfg(Lista& lista);
 void cargarCfg(Lista& lista,Lista& registros);
-int idcfg;
 void limpiaryagregaractual(Lista& registros, Node* actual);
+void menu_3(Lista& registros,Node* actual,Lista& lista);
 
 int main(){
     Lista lista;
@@ -132,18 +132,17 @@ int main(){
                         numero += option3;
                     }
                     if (esNumero) {
-                        lista.Eliminar(stoi(numero));
-                        registros.Eliminar(stoi(numero));
+                        lista.eliminar(stoi(numero));
+                        registros.eliminar(stoi(numero));
                     } else {
                         cout << "Error: Ingrese un número después de D" << endl;
                     }
                 }
                 
-                if (option3.length() = 0 && option3 == 'N'){
-                    int idnew = ultimaSong();
+                if (option3.length() == 0 && option3[0] == 'N'){
+                    int idnew = lista.ultimaSong();
                     
-                    int id,year,duracion;
-                    string nombre, artista, album,ruta;
+                    string nombre, artista, album,ruta,id,year,duracion;
                     cout<<"Nombre de la cancion: "<<endl;
                     cin >> nombre;
                     cout<<"Artista: "<<endl;
@@ -170,8 +169,8 @@ int main(){
                         numero += option3;
                     }
                     if (esNumero) {
-                        lista.Eliminar(stoi(numero));
-                        registros.Eliminar(stoi(numero));
+                        lista.eliminar(stoi(numero));
+                        registros.eliminar(stoi(numero));
                     } else {
                         cout << "Error: Ingrese un número después de D" << endl;
                     }
@@ -180,7 +179,7 @@ int main(){
             } while (option3 != "V");
             
             
-            };
+        }
         else if (opcion == "x") break;
         else {
             cout << "opcion invalida" << endl;
@@ -273,7 +272,7 @@ void mostrarMenu(Node* actual, Lista& lista){
         repe = "RA";
     }
     system("clear");
-    if (cfgant != false&& actual != nullptr){
+    if (reproduciendo){
         cout << "Reproduciendo"<<"("<< alas <<"-"<<repe<<")"<<":" << actual->nombre<< endl;
         cout << "Artista: "   << actual->artista<<endl;
         cout << "Album: "  << actual->album<<"   ["<<actual->year<<"]"<<endl;
@@ -293,7 +292,7 @@ void mostrarMenu(Node* actual, Lista& lista){
     cout << "X - Salir" << endl;
     cout << "Ingrese Opcion: " <<endl;
 }
-void
+
 void pausar(Lista& lista){
     Node* actual=lista.getActual();
     if(actual == nullptr) return;
@@ -383,7 +382,7 @@ void cargarCfg(Lista& lista,Lista& registros){
         if (temp != nullptr) {
             lista.Cfg(temp);
             cfgant = true;
-            limpiaryagregaractual(registos,temp);
+            limpiaryagregaractual(registros,temp);
         } else {
             cfgant = false;
         }
@@ -424,13 +423,13 @@ void limpiaryagregaractual(Lista& registros, Node* actual){
 	registros.limpiar();
 	
 	Node* clon = new Node(
-        clonar->id,
-        clonar->nombre,
-        clonar->artista,
-        clonar->album,
-        clonar->year,
-        clonar->duracion,
-        clonar->ruta
+        clon->id,
+        clon->nombre,
+        clon->artista,
+        clon->album,
+        clon->year,
+        clon->duracion,
+        clon->ruta
     );
     registros.agregar(clon);
 }
