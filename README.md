@@ -1,7 +1,9 @@
 # taller-1-estru
 
-Francisco Castillo
-Benjamin Torres
+## Integrantes
+
+-Francisco Castillo
+-Benjamin Torres
 
 ---
 
