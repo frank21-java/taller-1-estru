@@ -1,0 +1,4 @@
+id=4
+reproduciendo=true
+modo aleatorio=false
+repeticion=0
