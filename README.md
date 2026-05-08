@@ -15,7 +15,7 @@ Este es un reproductor de musica desarrollado en c++, simula un reproductor leye
 
 ## Diagrama de clases
 
-!(docs/diagrama_de_clases.jpg)
+![](docs/diagrama_de_clases.jpg)
 
 ---
 
