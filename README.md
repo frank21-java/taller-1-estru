@@ -1,9 +1,9 @@
-# taller-1-estru
+# Nombre personalizado67
 
 ## Integrantes
 
--Francisco Castillo
--Benjamin Torres
+- Francisco Castillo
+- Benjamin Torres
 
 ---
 
