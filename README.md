@@ -21,7 +21,9 @@ Este es un reproductor de musica desarrollado en c++, simula un reproductor leye
 
 ## Instrucciones de compilacion
 
-f
+1. Ir a hasta la carpeta donde se encuentra main desde el explorador de archivos
+2. Copiar la ruta y abrir la consola del sistema
+3. En el cmd copiar y pegar "g++ main.cpp data_structures/Node.cpp data_structures/Lista.cpp core/reproductor.cpp core/configuracion.cpp core/archivos.cpp -o reproductor"
 
 ---
 
