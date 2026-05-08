@@ -30,13 +30,23 @@ Este es un reproductor de musica desarrollado en c++, simula un reproductor leye
 ## Funciones
 
 
-- `W` → Reproducir / Pausar
-- `Q` → Pista anterior
-- `E` → Pista siguiente
-- `S` → Activar / Desactivar modo aleatorio
-- `R` → Repetición (Desactivado/Repetir una/Repetir todas)
-- `A` → Ver lista de reproducción actual
-- `L` → Listado de canciones
-- `X` → Salir
+- `W` -> Reproducir / Pausar
+- `Q` -> Pista anterior
+- `E` -> Pista siguiente
+- `S` -> Activar / Desactivar modo aleatorio
+- `R` -> Repetición (Desactivado/Repetir una/Repetir todas)
+- `A` -> Ver lista de reproducción actual
+- `L` -> Listado de canciones
+- `X` -> Salir
 
-agregar las opciones de submenus
+Opciones del menu "a"
+- `S<num>` -> Salta a la cancion en la posicion de num
+- `V` -> Cierra el submenu y vuelve al principal
+
+Opciones del menu "l"
+
+- `R<num>` -> Reproduce la cancion seleccionada
+- `A<num>` -> Agrega la cancion al final de la lista
+- `N` -> Agrega la cancion al registro
+- `D<num>` -> Eliminar la cancion el posicion num
+- `V` -> Cierra el submenu y vuelve al principal
